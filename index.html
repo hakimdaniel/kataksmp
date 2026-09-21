@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>KatakSMP — Rank Store</title>
+    <meta
+      name="description"
+      content="KatakSMP Store — Beli rank, item dan keistimewaan untuk server Minecraft KatakSMP."
+    />
+
+    <meta
+      name="keywords"
+      content="KatakSMP, Katak SMP, Minecraft SMP, Minecraft Store, Minecraft Rank, beli rank Minecraft"
+    />
+
+    <meta name="author" content="KatakSMP" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/img/logo.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="KatakSMP Store" />
+    <meta
+      property="og:description"
+      content="Beli rank dan keistimewaan untuk server Minecraft KatakSMP."
+    />
+    <meta property="og:image" content="./assets/img/logo.png" />
+    <meta property="og:site_name" content="KatakSMP Store" />
+
+    <!-- Twitter / Discord -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="KatakSMP Store" />
+    <meta
+      name="twitter:description"
+      content="Beli rank dan keistimewaan untuk server Minecraft KatakSMP."
+    />
+    <meta name="twitter:image" content="./assets/img/logo.png" />
+
+    <meta name="theme-color" content="#22c55e" />
+    <style>
+      @font-face {
+        font-family: "Minecraft";
+        src: url("./assets/fonts/Minecraft.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      :root {
+        --bg: #080b10;
+        --panel: #10151d;
+        --panel-hover: #151c26;
+        --text: #f4f7fb;
+        --muted: #9aa6b5;
+        --accent: #55e06f;
+        --accent-dark: #2e9e46;
+        --border: #27313d;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Minecraft", monospace;
+        background:
+          radial-gradient(circle at 50% -10%, #1b3422 0%, transparent 45%),
+          var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* NAVBAR */
+
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0 6%;
+        background: rgba(8, 11, 16, 0.88);
+        backdrop-filter: blur(12px);
+
+        border-bottom: 1px solid var(--border);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        font-size: 20px;
+      }
+
+      .logo img {
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+      }
+
+      nav a {
+        color: var(--muted);
+        transition: 0.2s;
+      }
+
+      nav a:hover {
+        color: var(--accent);
+      }
+
+      /* HERO */
+
+      .hero {
+        text-align: center;
+        padding: 90px 20px 65px;
+      }
+
+      .hero-logo {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        margin-bottom: 20px;
+
+        filter: drop-shadow(0 0 25px rgba(85, 224, 111, 0.3));
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 6vw, 58px);
+        margin-bottom: 15px;
+      }
+
+      .hero h1 span {
+        color: var(--accent);
+      }
+
+      .hero p {
+        max-width: 650px;
+        margin: auto;
+
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 15px;
+      }
+
+      /* RANKS */
+
+      .store {
+        width: min(1200px, 92%);
+        margin: auto;
+        padding-bottom: 100px;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .section-title h2 {
+        font-size: 30px;
+        margin-bottom: 8px;
+      }
+
+      .section-title p {
+        color: var(--muted);
+      }
+
+      .ranks {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .rank {
+        position: relative;
+
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.035),
+          rgba(255, 255, 255, 0.01)
+        );
+
+        border: 1px solid var(--border);
+        border-radius: 14px;
+
+        padding: 24px;
+
+        transition:
+          transform 0.25s,
+          border-color 0.25s,
+          background 0.25s;
+      }
+
+      .rank:hover {
+        transform: translateY(-7px);
+        border-color: var(--accent);
+        background: var(--panel-hover);
+      }
+
+      .rank-image {
+        width: 130px;
+        height: 130px;
+
+        object-fit: contain;
+        display: block;
+        margin: 5px auto 20px;
+      }
+
+      .rank-name {
+        text-align: center;
+        font-size: 25px;
+        margin-bottom: 8px;
+      }
+
+      .rank-price {
+        text-align: center;
+        color: var(--accent);
+        font-size: 22px;
+        margin-bottom: 22px;
+      }
+
+      .description {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+        margin-bottom: 18px;
+      }
+
+      .features {
+        list-style: none;
+        margin-bottom: 25px;
+      }
+
+      .features li {
+        color: #d7dee7;
+        font-size: 13px;
+        margin-bottom: 10px;
+      }
+
+      .features li::before {
+        content: "✓";
+        color: var(--accent);
+        margin-right: 8px;
+      }
+
+      .buy {
+        display: block;
+        width: 100%;
+
+        padding: 13px;
+
+        border: 1px solid var(--accent);
+        border-radius: 8px;
+
+        background: var(--accent);
+        color: #061008;
+
+        text-align: center;
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+      }
+
+      .buy:hover {
+        background: transparent;
+        color: var(--accent);
+      }
+
+      /* INFO */
+
+      .info {
+        width: min(850px, 92%);
+        margin: 0 auto 100px;
+
+        padding: 25px;
+
+        border: 1px solid var(--border);
+        border-radius: 12px;
+
+        background: var(--panel);
+
+        text-align: center;
+      }
+
+      .info h3 {
+        margin-bottom: 10px;
+      }
+
+      .info p {
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 13px;
+      }
+
+      /* FOOTER */
+
+      footer {
+        border-top: 1px solid var(--border);
+
+        padding: 30px 20px;
+
+        text-align: center;
+        color: var(--muted);
+
+        font-size: 12px;
+      }
+
+      /* RESPONSIVE */
+
+      @media (max-width: 1000px) {
+        .ranks {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        nav {
+          padding: 0 20px;
+        }
+
+        nav > a {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 60px;
+        }
+
+        .ranks {
+          grid-template-columns: 1fr;
+        }
+
+        .rank {
+          padding: 25px;
+        }
+      }
+      img {
+        image-rendering: pixelated;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo">
+        <img src="./assets/img/logo.png" alt="KatakSMP" />
+        <span>KatakSMP</span>
+      </div>
+
+      <a href="#ranks">Ranks</a>
+    </nav>
+    <main>
+      <section class="hero">
+        <img
+          class="hero-logo"
+          src="./assets/img/logo.png"
+          alt="KatakSMP Logo"
+          style="height: 100px; width: 190px; object-fit: fill"
+        />
+
+        <h1>KATAK<span>SMP</span></h1>
+
+        <p>
+          Upgrade your Minecraft experience with exclusive ranks, extra features
+          and special perks available on KatakSMP.
+        </p>
+      </section>
+
+      <section class="store" id="ranks">
+        <div class="section-title">
+          <h2>Server Ranks</h2>
+          <p>Choose your rank and unlock more features.</p>
+        </div>
+
+        <div class="ranks">
+          <!-- ELITE -->
+
+          <article class="rank">
+            <img
+              class="rank-image"
+              src="./assets/img/elite_symbol.png"
+              alt="Elite Symbol"
+              style="width: 80px; transform: translate(0, 50px)"
+            />
+            <img
+              class="rank-image"
+              src="./assets/img/elite.png"
+              alt="Elite Rank"
+            />
+
+            <h3 class="rank-name">ELITE</h3>
+
+            <div class="rank-price">RM 3</div>
+
+            <p class="description">
+              Entry-level premium rank for players who want a few useful extras
+              while playing survival.
+            </p>
+
+            <ul class="features">
+              <li>sethome 3 slots</li>
+              <li>Use /craft</li>
+              <li>Use /disolve</li>
+              <li>Elite prefix</li>
+              <li>Elite kits</li>
+            </ul>
+
+            <a
+              class="buy"
+              href="https://discord.com/users/katak_comel_76283"
+              target="_blank"
+            >
+              BUY ELITE
+            </a>
+          </article>
+
+          <!-- DUKE -->
+
+          <article class="rank">
+            <img
+              class="rank-image"
+              src="./assets/img/duke_symbol.png"
+              alt="Duke Symbol"
+              style="width: 80px; transform: translate(0, 50px)"
+            />
+            <img
+              class="rank-image"
+              src="./assets/img/duke.png"
+              alt="Duke Rank"
+            />
+
+            <h3 class="rank-name">DUKE</h3>
+
+            <div class="rank-price">RM 5</div>
+
+            <p class="description">
+              A stronger rank for active players who want more convenience and
+              additional survival features.
+            </p>
+
+            <ul class="features">
+              <li>sethome 5 slots</li>
+              <li>Use /craft</li>
+              <li>Use /disolve</li>
+              <li>Use /enderchest</li>
+              <li>Legend prefix</li>
+              <li>Use /near</li>
+              <li>Legend kits</li>
+            </ul>
+
+            <a
+              class="buy"
+              href="https://discord.com/users/katak_comel_76283"
+              target="_blank"
+            >
+              BUY DUKE
+            </a>
+          </article>
+
+          <!-- MYTHIC -->
+
+          <article class="rank">
+            <img
+              class="rank-image"
+              src="./assets/img/mythic_symbol.png"
+              alt="Mythic Symbol"
+              style="width: 80px; transform: translate(0, 50px)"
+            />
+            <img
+              class="rank-image"
+              src="./assets/img/mythic.png"
+              alt="Mythic Rank"
+            />
+
+            <h3 class="rank-name">MYTHIC</h3>
+
+            <div class="rank-price">RM 10</div>
+
+            <p class="description">
+              A premium rank designed for dedicated KatakSMP players who want
+              the most powerful survival perks.
+            </p>
+
+            <ul class="features">
+              <li>sethome 10 slots</li>
+              <li>Use /craft</li>
+              <li>Use /disolve</li>
+              <li>Use /enderchest</li>
+              <li>Use /near</li>
+              <li>Use /heal</li>
+              <li>Mythic prefix</li>
+              <li>Mythic kits</li>
+            </ul>
+
+            <a
+              class="buy"
+              href="https://discord.com/users/katak_comel_76283"
+              target="_blank"
+            >
+              BUY MYTHIC
+            </a>
+          </article>
+
+          <!-- MEDIA -->
+
+          <article class="rank">
+            <img
+              class="rank-image"
+              src="./assets/img/media_symbol.png"
+              alt="Media Symbol"
+              style="width: 80px; transform: translate(0, 50px)"
+            />
+            <img
+              class="rank-image"
+              src="./assets/img/media.png"
+              alt="Media Rank"
+            />
+
+            <h3 class="rank-name">MEDIA</h3>
+
+            <div class="rank-price">FREE</div>
+
+            <p class="description">
+              Special rank for creators who help promote and create content
+              around KatakSMP.<br />>>
+              <a
+                href="#"
+                style="color: rgb(34, 156, 255); text-decoration: underline"
+                >See requirements</a
+              >
+            </p>
+
+            <ul class="features">
+              <li>sethome 6 slots</li>
+              <li>Use /craft</li>
+              <li>Use /disolve</li>
+              <li>Use /fly</li>
+              <li>Use /near</li>
+              <li>Use /heal</li>
+              <li>Media prefix</li>
+            </ul>
+
+            <a
+              class="buy"
+              href="https://discord.com/users/katak_comel_76283"
+              target="_blank"
+            >
+              APPLY ON DISCORD
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="info">
+        <h3>How to Purchase?</h3>
+
+        <p>
+          Click the purchase button for the rank you want. You will be
+          redirected to Discord. Send a private message to
+          <strong>@katak_comel_76283</strong> or <strong>@mikayt259</strong> to
+          complete your purchase.
+        </p>
+      </section>
+    </main>
+
+    <footer>© 2026 KatakSMP. All rights reserved.</footer>
+  </body>
+</html>
