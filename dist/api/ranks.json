@@ -73,11 +73,10 @@
   {
     "name": "Media",
     "price": "FREE",
-    "description": "",
+    "description": "Join https://discord.gg/Q68QUpgEd",
     "image": "/images/ranks/media.png",
     "icon": "/images/ranks/media_symbol.png",
     "features": [],
-    "closed": true,
-    "reason": "Closed"
+    "closed": false
   }
 ]
