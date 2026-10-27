@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "store.kataksmp.com"
+        }
+      ],
+      "destination": "https://www.kataksmp.com/:path*",
+      "permanent": true
+    }
+  ]
+}
